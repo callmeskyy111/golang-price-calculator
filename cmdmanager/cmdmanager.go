@@ -2,7 +2,7 @@ package cmdmanager
 
 import "fmt"
 
-// Swappable Struct
+// Swappable Struct (Optnl.)
 
 type CMDManager struct {
 }
