@@ -7,10 +7,15 @@ import (
 	"os"
 )
 
-func ReadLines(path string) ([]string, error) {
-	file, err := os.Open("prices.txt")
+type FileManager struct{
+	InputFilePath string
+	OutPutFilePath string
+}
+
+func(fm FileManager) ReadLines() ([]string, error) {
+	file, err := os.Open(fm.InputFilePath)
 	if err != nil {
-		return nil, errors.New("failed to open file!")
+		return nil, errors.New("failed to open file")
 	}
 	scanner := bufio.NewScanner(file)
 
@@ -22,17 +27,16 @@ func ReadLines(path string) ([]string, error) {
 	err = scanner.Err()
 	if err != nil {
 		file.Close()
-		return nil, errors.New("failed to read line in file!")
+		return nil, errors.New("failed to read line in file")
 	}
 
 	file.Close()
 	return lines, nil
-
 }
 
 // Storing JSON Data in Files
-func WriteJSON(path string, data any) error {
-	file, err := os.Create(path)
+func(fm FileManager) WriteResult(data any) error {
+	file, err := os.Create(fm.OutPutFilePath)
 	if err != nil {
 		return errors.New("failed to create file")
 	}
@@ -44,4 +48,12 @@ func WriteJSON(path string, data any) error {
 	}
 	file.Close()
 	return  nil
+}
+
+// Constructir Fx
+func New(inputPath, outputPath string)FileManager{
+return FileManager{
+	InputFilePath: inputPath,
+	OutPutFilePath: outputPath,
+}
 }
