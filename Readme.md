@@ -1,5 +1,3 @@
----
-
 # Golang Price Calculator
 
 A modular Go (Golang) CLI project that reads product prices, applies customizable tax rates, and outputs tax-included prices in JSON format.
